@@ -94,7 +94,17 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->group(fu
     Route::delete('category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
     // Orders
-    Route::get('pemesanan', [PemesananMasukController::class, 'index'])->name('admin.pemesanan');
+    // Route::get('pemesanan', [PemesananMasukController::class, 'index'])->name('admin.pemesanan');
+    Route::controller(PemesananMasukController::class)->group(function () {
+        Route::get('/pemesanan/data', 'data')->name('admin.pemesanan.data'); // Rute untuk data pemesanan
+        Route::get('/pemesanan', 'index')->name('admin.pemesanan'); // Rute utama pemesanan
+        Route::get('/pemesanan/{id}/detail', 'detail')->name('admin.pemesanan.detail'); // Rute utama pemesanan
+        Route::post('/pemesanan/update-status', 'updateStatus')->name('admin.pemesanan.updateStatus');
+    });
+
+
+
+
     Route::get('inputorder', [OrderController::class, 'index'])->name('admin.input.order');
     Route::get('produk/data', [OrderController::class, 'getProdukData']);
 
