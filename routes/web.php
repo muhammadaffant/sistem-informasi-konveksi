@@ -99,6 +99,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->group(fu
     Route::get('produk/data', [OrderController::class, 'getProdukData']);
 
     // Jasa Layanan
+    Route::get('jasalayanan/data', [JasaLayananController::class, 'data'])->name('jasalayanan.data');
     Route::resource('jasalayanan', JasaLayananController::class);
 
     // Users
